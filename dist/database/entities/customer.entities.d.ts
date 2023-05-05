@@ -1,0 +1,32 @@
+import { GenderEnum, UserStatusEnum } from './../../enums';
+import { Order, Ward, CustomerGroup, OrderRefund, PaymentHistory } from '.';
+export declare class Customer {
+    id: string;
+    password?: string;
+    lastLogin?: Date;
+    code: string;
+    status?: UserStatusEnum;
+    phone?: string;
+    email?: string;
+    fullName?: string;
+    gender?: GenderEnum;
+    address?: string;
+    fullAddress?: string;
+    note?: string;
+    noteStatus: string;
+    birthday?: Date;
+    otpCode: string;
+    otpExpired: Date;
+    createdBy: string;
+    updatedBy: string;
+    refreshToken?: string;
+    accessToken?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    deletedAt?: Date;
+    ward: Ward;
+    customerGroup?: CustomerGroup;
+    orders?: Order[];
+    orderRefunds?: OrderRefund[];
+    paymentHistories: PaymentHistory[];
+}
