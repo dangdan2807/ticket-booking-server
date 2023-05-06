@@ -163,6 +163,9 @@ export class AuthCustomerService {
     if (!customer || !customer?.password) {
       throw new BadRequestException('INVALID_USERNAME_OR_PASSWORD');
     }
+    if (!dto.password) {
+      throw new BadRequestException('PASSWORD_IS_REQUIRED');
+    }
 
     const isPasswordMatches = await this.authService.comparePassword(
       password,

@@ -6,6 +6,7 @@ import {
   MinLength,
   IsOptional,
   IsPhoneNumber,
+  MaxLength,
 } from 'class-validator';
 
 export class AdminLoginDto {
@@ -25,5 +26,6 @@ export class AdminLoginDto {
   @IsNotEmpty({ message: 'PASSWORD_IS_REQUIRED' })
   @IsString({ message: 'PASSWORD_IS_STRING' })
   @MinLength(6, { message: 'PASSWORD_IS_MIN_LENGTH_6' })
+  @MaxLength(255, { message: 'PASSWORD_IS_MAX_LENGTH_255' })
   password: string;
 }
