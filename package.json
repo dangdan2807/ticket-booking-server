@@ -52,7 +52,6 @@
     "crypto-js": "^4.1.1",
     "exceljs": "^4.3.0",
     "helmet": "^6.0.1",
-    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "nest-winston": "^1.8.0",
