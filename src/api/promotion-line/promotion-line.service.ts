@@ -29,8 +29,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 @Injectable()
 export class PromotionLineService {

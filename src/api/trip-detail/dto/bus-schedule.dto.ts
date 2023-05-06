@@ -1,8 +1,8 @@
 import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { TripDetailStatusEnum } from './../../../enums';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class BusScheduleDto {
   @ApiProperty({ example: moment().startOf('isoWeek').format('YYYY-MM-DD HH:mm') })

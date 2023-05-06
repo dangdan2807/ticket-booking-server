@@ -1,8 +1,8 @@
 import { SortEnum } from '../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterBillAvailableDto {
   @ApiPropertyOptional({ example: 'Bảng giá tháng 3/2023' })

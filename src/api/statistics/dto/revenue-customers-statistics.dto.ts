@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDate, IsOptional, IsString } from 'class-validator';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export class RevenueStatisticsDto {
   @ApiPropertyOptional({ example: '' })

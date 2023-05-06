@@ -8,8 +8,8 @@ import {
   Length,
 } from 'class-validator';
 import { TripDetailStatusEnum } from '../../../enums';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class CreateTripDetailDto {
   @ApiProperty({ example: '' })

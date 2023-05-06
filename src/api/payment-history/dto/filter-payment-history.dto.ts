@@ -7,8 +7,8 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterPaymentHistoryDto {
   @ApiPropertyOptional({ example: '' })

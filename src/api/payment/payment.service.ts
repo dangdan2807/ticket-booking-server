@@ -28,13 +28,13 @@ import { ConfigService } from '@nestjs/config';
 import * as CryptoJS from 'crypto-js';
 import axios from 'axios';
 import * as qs from 'qs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import {
   CreatePaymentHistoryDto,
   UpdatePaymentHistoryDto,
 } from '../payment-history/dto';
-moment.locale('vi');
+// moment.locale('vi');
 
 @Injectable()
 export class PaymentService {

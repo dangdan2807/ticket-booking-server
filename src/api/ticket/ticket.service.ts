@@ -23,8 +23,8 @@ import {
 } from '@nestjs/common';
 import { Repository, DataSource, EntityManager } from 'typeorm';
 import { SeatService } from '../seat/seat.service';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 @Injectable()
 export class TicketService {

@@ -11,9 +11,9 @@ import {
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ProductDiscountDto, ProductDiscountPercentDto } from '.';
-moment.locale('vi');
+// moment.locale('vi');
 
 export class UpdatePromotionLineDto {
   @ApiPropertyOptional({ example: '' })

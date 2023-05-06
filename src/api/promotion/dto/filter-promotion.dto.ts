@@ -1,8 +1,8 @@
 import { PromotionStatusEnum, SortEnum } from '../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum, IsDate } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterPromotionDto {
   @ApiPropertyOptional({ example: 'KM1' })

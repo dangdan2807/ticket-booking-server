@@ -1,7 +1,7 @@
 import { GenderEnum } from './../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export class AdminUpdateDto {
   @ApiPropertyOptional({ example: 'fullName' })

@@ -1,5 +1,5 @@
 import * as shortId from 'shortid';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export function generateOrderCode() {
   const date = new Date();

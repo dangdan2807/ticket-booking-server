@@ -19,8 +19,8 @@ import {
   ProductDiscountDto,
   ProductDiscountPercentDto,
 } from './promotion-type.dto';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class CreatePromotionLineDto {
   @ApiProperty({ example: 'KM1' })

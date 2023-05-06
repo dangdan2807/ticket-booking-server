@@ -53,7 +53,7 @@ import { UpdateTicketDetailDto } from '../ticket/dto';
 import { PromotionLineService } from '../promotion-line/promotion-line.service';
 import { PromotionHistoryService } from '../promotion-history/promotion-history.service';
 import { CreatePromotionHistoryDto } from '../promotion-history/dto';
-import * as moment from 'moment';
+import moment from 'moment';
 import {
   FilterOrderRefundDto,
   UpdateOrderRefundDto,
@@ -61,7 +61,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import { CreatePaymentHistoryDto } from '../payment-history/dto';
-moment.locale('vi');
+// moment.locale('vi');
 
 @Injectable()
 export class OrderService {

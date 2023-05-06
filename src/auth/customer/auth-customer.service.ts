@@ -11,9 +11,9 @@ import { DataSource, Repository } from 'typeorm';
 import { AuthService } from '../auth.service';
 import { CustomerLoginDto, CustomerRegisterDto, SendOtpDto } from './dto';
 import { generateCustomerCode } from './../../utils';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ConfigService } from '@nestjs/config';
-moment.locale('vi');
+// moment.locale('vi');
 
 @Injectable()
 export class AuthCustomerService {

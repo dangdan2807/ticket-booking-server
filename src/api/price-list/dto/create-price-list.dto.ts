@@ -8,8 +8,8 @@ import {
   IsEnum,
   IsDate,
 } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class CreatePriceListDto {
   @ApiProperty({ example: 'BGT32023' })

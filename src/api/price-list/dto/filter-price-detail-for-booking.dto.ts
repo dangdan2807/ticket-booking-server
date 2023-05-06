@@ -7,8 +7,8 @@ import {
   IsNotEmpty,
   IsString,
 } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterPriceDetailForBookingDto {
   @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })

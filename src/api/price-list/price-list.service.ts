@@ -29,8 +29,8 @@ import {
   MoreThanOrEqual,
   LessThanOrEqual,
 } from 'typeorm';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 @Injectable()
 export class PriceListService {

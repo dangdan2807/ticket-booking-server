@@ -7,8 +7,8 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterAvailablePromotionLineDto {
   @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })

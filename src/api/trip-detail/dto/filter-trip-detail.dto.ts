@@ -8,8 +8,8 @@ import {
   Min,
 } from 'class-validator';
 import { SortEnum, TripDetailStatusEnum } from './../../../enums';
-import * as moment from 'moment';
-moment.locale('vi');
+import moment from 'moment';
+// moment.locale('vi');
 
 export class FilterTripDetailDto {
   @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD HH:mm') })

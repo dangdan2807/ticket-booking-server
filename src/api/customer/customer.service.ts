@@ -25,7 +25,7 @@ import { AddCustomerDto, RemoveCustomerDto } from '../customer-group/dto';
 import { generateCustomerCode } from './../../utils';
 import * as bcrypt from 'bcrypt';
 import moment from 'moment';
-// moment.locale('vi');
+// // moment.locale('vi');
 
 @Injectable()
 export class CustomerService {

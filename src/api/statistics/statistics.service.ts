@@ -19,7 +19,7 @@ import {
   TicketStatisticsDto,
   TopCustomerStatisticsDto,
 } from './dto';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Pagination } from './../../decorator';
 
 @Injectable()
