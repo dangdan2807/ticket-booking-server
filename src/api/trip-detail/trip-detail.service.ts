@@ -26,7 +26,7 @@ import {
 } from './../../enums';
 import { Pagination } from './../../decorator';
 import { TicketService } from '../ticket/ticket.service';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class TripDetailService {
@@ -189,6 +189,26 @@ export class TripDetailService {
     }
 
     if (departureTime) {
+      // // Lấy ngày bắt đầu của departureTime
+      // const startOfDay = new Date(
+      //   departureTime.getFullYear(),
+      //   departureTime.getMonth(),
+      //   departureTime.getDate(),
+      // );
+
+      // // Lấy ngày kết thúc của departureTime
+      // const endOfDay = new Date(
+      //   departureTime.getFullYear(),
+      //   departureTime.getMonth(),
+      //   departureTime.getDate() + 1,
+      //   0,
+      //   0,
+      //   0,
+      //   -1,
+      // );
+
+      // const minTime = startOfDay;
+      // const maxTime = endOfDay;
       const minTime = moment(departureTime).startOf('day').toDate();
       const maxTime = moment(departureTime).endOf('day').toDate();
       query
@@ -696,7 +716,9 @@ export class TripDetailService {
     const newEndDate = moment(endDate).endOf('day').toDate();
     // startDate not more than 7 days from endDate
     if (moment(newEndDate).diff(moment(newStartDate), 'days') > 7) {
-      throw new BadRequestException('START_DATE_NOT_MORE_THAN_7_DAYS_FROM_END_DATE');
+      throw new BadRequestException(
+        'START_DATE_NOT_MORE_THAN_7_DAYS_FROM_END_DATE',
+      );
     }
 
     const trips = await this.tripDetailRepository
