@@ -1,1 +1,0 @@
-{"version":3,"file":"update-status-user.dto.js","sourceRoot":"","sources":["../../../../src/api/users/dto/update-status-user.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA8C;AAC9C,4CAAkD;AAClD,qDAAqD;AAErD,MAAa,mBAAmB;CAK/B;AAJC;IAAC,IAAA,wBAAM,EAAC,sBAAc,CAAC;IACtB,IAAA,qBAAW,EAAC,EAAE,OAAO,EAAE,sBAAc,CAAC,UAAU,EAAE,CAAC;IACnD,IAAA,4BAAU,GAAE;;mDACU;AAJzB,kDAKC"}
