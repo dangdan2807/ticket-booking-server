@@ -29,7 +29,7 @@ import {
   MoreThanOrEqual,
   LessThanOrEqual,
 } from 'typeorm';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 @Injectable()

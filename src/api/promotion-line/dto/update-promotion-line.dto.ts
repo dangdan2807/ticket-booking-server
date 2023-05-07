@@ -11,7 +11,7 @@ import {
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ProductDiscountDto, ProductDiscountPercentDto } from '.';
 // moment.locale('vi');
 

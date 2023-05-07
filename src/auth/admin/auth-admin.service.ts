@@ -11,7 +11,7 @@ import { DataSource, Repository } from 'typeorm';
 import { AuthService } from '../auth.service';
 import { AdminLoginDto, AdminRegisterDto } from './dto';
 import { SendOtpDto } from '../customer/dto';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ConfigService } from '@nestjs/config';
 import { AdminService } from './../../api/admin/admin.service';
 

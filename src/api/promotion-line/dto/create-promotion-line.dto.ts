@@ -19,7 +19,7 @@ import {
   ProductDiscountDto,
   ProductDiscountPercentDto,
 } from './promotion-type.dto';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 export class CreatePromotionLineDto {

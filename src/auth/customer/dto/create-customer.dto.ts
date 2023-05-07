@@ -12,7 +12,7 @@ import {
   IsPhoneNumber,
   IsNumber,
 } from 'class-validator';
-import moment from 'moment';
+import * as moment from 'moment';
 
 export class CustomerRegisterDto {
   @ApiPropertyOptional({ example: 'superman@gmail.com' })

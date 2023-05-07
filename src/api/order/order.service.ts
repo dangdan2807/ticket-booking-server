@@ -53,7 +53,7 @@ import { UpdateTicketDetailDto } from '../ticket/dto';
 import { PromotionLineService } from '../promotion-line/promotion-line.service';
 import { PromotionHistoryService } from '../promotion-history/promotion-history.service';
 import { CreatePromotionHistoryDto } from '../promotion-history/dto';
-import moment from 'moment';
+import * as moment from 'moment';
 import {
   FilterOrderRefundDto,
   UpdateOrderRefundDto,

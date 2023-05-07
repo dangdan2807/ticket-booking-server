@@ -12,10 +12,8 @@ import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import * as CryptoJS from 'crypto-js';
-import moment from 'moment';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import { UpdatePaymentHistoryDto } from '../payment-history/dto';
-// moment.locale('vi');
 
 @Injectable()
 export class CallbackService {

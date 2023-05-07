@@ -20,7 +20,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 @Injectable()

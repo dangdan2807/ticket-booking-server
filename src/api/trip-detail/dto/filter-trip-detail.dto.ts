@@ -8,7 +8,7 @@ import {
   Min,
 } from 'class-validator';
 import { SortEnum, TripDetailStatusEnum } from './../../../enums';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 export class FilterTripDetailDto {

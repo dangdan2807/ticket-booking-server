@@ -28,7 +28,7 @@ import { ConfigService } from '@nestjs/config';
 import * as CryptoJS from 'crypto-js';
 import axios from 'axios';
 import * as qs from 'qs';
-import moment from 'moment';
+import * as moment from 'moment';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import {
   CreatePaymentHistoryDto,

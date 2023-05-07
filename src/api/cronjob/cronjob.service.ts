@@ -1,14 +1,12 @@
 import { CheckStatusZaloPayPaymentDto } from './../payment/dto';
 import { OrderStatusEnum, PaymentMethodEnum } from './../../enums';
-import { DataSource, IsNull, Not, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CronjobOrderPaymentDto } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order, PaymentHistory } from './../../database/entities';
-import moment from 'moment';
 import { PaymentService } from '../payment/payment.service';
-// moment.locale('vi');
 
 @Injectable()
 export class CronjobService {

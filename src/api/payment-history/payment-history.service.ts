@@ -23,7 +23,7 @@ import {
 } from './dto';
 import { Order, PaymentHistory } from './../../database/entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 @Injectable()

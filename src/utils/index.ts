@@ -8,3 +8,4 @@ export * from './translate.util';
 export * from './generation-code.util';
 export * from './mailer.util';
 export * from './templateHtml.util';
+export * from './moment.util';

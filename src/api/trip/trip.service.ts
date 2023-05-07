@@ -14,7 +14,7 @@ import { Staff, Station, Trip } from './../../database/entities';
 import { DataSource, Repository } from 'typeorm';
 import { SortEnum, DeleteDtoTypeEnum, ActiveStatusEnum } from './../../enums';
 import { Pagination } from './../../decorator';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 @Injectable()

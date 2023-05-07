@@ -1,7 +1,7 @@
 import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { TripDetailStatusEnum } from './../../../enums';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 export class BusScheduleDto {

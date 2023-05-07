@@ -26,7 +26,7 @@ import {
 } from './../../enums';
 import { Pagination } from './../../decorator';
 import { TicketService } from '../ticket/ticket.service';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class TripDetailService {

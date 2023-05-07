@@ -1,7 +1,7 @@
 import { OrderStatusEnum, SortEnum } from '../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
-import moment from 'moment';
+import * as moment from 'moment';
 // moment.locale('vi');
 
 export class FilterBillHistoryDto {
