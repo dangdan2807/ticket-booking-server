@@ -502,7 +502,7 @@ export class CustomerService {
     if (birthday) {
       customer.birthday = birthday;
     } else {
-      customer.birthday = MyMoment().startOf('day').toDate();
+      customer.birthday = moment().startOf('day').toDate();
     }
 
     if (email) {

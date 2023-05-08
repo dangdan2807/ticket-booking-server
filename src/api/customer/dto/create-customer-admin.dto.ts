@@ -52,11 +52,7 @@ export class CreateCustomerForAdminDto {
   @Length(1, 255, { message: 'ADDRESS_BETWEEN_1_255_CHARACTERS' })
   address: string;
 
-<<<<<<< Updated upstream
-  @ApiPropertyOptional({ example: MyMoment().format('YYYY-MM-DD') })
-=======
   @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
->>>>>>> Stashed changes
   @IsDate({ message: 'BIRTHDAY_IS_DATE' })
   @IsOptional()
   birthday?: Date;
