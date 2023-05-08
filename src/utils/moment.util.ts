@@ -87,12 +87,29 @@ export class MyMoment {
 
   subtract(amount: number, unit: unitOfTime.DurationConstructor) {
     const unitsInMilliseconds = {
+      ms: 1,
+      millisecond: 1,
       milliseconds: 1,
+      s: 1000,
+      second: 1000,
       seconds: 1000,
+      m: 60000,
+      minute: 60000,
       minutes: 60000,
+      h: 3600000,
+      hour: 3600000,
       hours: 3600000,
+      d: 86400000,
+      day: 86400000,
       days: 86400000,
+      month: 2592000000,
       months: 2592000000,
+      M: 2592000000,
+      q: 7776000000,
+      quarter: 7776000000,
+      quarters: 7776000000,
+      y: 31536000000,
+      year: 31536000000,
       years: 31536000000,
     };
 
@@ -103,12 +120,29 @@ export class MyMoment {
 
   add(amount: number, unit: unitOfTime.DurationConstructor) {
     const unitsInMilliseconds = {
+      ms: 1,
+      millisecond: 1,
       milliseconds: 1,
+      s: 1000,
+      second: 1000,
       seconds: 1000,
+      m: 60000,
+      minute: 60000,
       minutes: 60000,
+      h: 3600000,
+      hour: 3600000,
       hours: 3600000,
+      d: 86400000,
+      day: 86400000,
       days: 86400000,
+      month: 2592000000,
       months: 2592000000,
+      M: 2592000000,
+      q: 7776000000,
+      quarter: 7776000000,
+      quarters: 7776000000,
+      y: 31536000000,
+      year: 31536000000,
       years: 31536000000,
     };
 
@@ -179,12 +213,29 @@ export class MyMoment {
     );
 
     const unitsInMilliseconds = {
+      ms: 1,
+      millisecond: 1,
       milliseconds: 1,
+      s: 1000,
+      second: 1000,
       seconds: 1000,
+      m: 60000,
+      minute: 60000,
       minutes: 60000,
+      h: 3600000,
+      hour: 3600000,
       hours: 3600000,
+      d: 86400000,
+      day: 86400000,
       days: 86400000,
+      month: 2592000000,
       months: 2592000000,
+      M: 2592000000,
+      q: 7776000000,
+      quarter: 7776000000,
+      quarters: 7776000000,
+      y: 31536000000,
+      year: 31536000000,
       years: 31536000000,
     };
 
