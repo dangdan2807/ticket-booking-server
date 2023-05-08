@@ -30,7 +30,7 @@ import {
   WardDeleteMultiCode,
 } from './dto';
 import { MyMoment } from './../../../utils';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 @Controller('ward')
 @ApiTags('Ward')
@@ -157,12 +157,12 @@ export class WardController {
         startOfDate,
         endOfDate,
       },
-      moment: {
-        format: moment(currentDate).format('YYYY-MM-DD HH:mm:ss'),
-        startOfDate: moment(currentDate).startOf('day'),
-        endOfDate: moment(currentDate).endOf('day'),
-        // endOfDate: moment(currentDate).diff('day'),
-      }
+      // moment: {
+      //   format: moment(currentDate).format('YYYY-MM-DD HH:mm:ss'),
+      //   startOfDate: moment(currentDate).startOf('day'),
+      //   endOfDate: moment(currentDate).endOf('day'),
+      //   // endOfDate: moment(currentDate).diff('day'),
+      // }
     };
   }
 
