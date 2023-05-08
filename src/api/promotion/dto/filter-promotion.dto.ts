@@ -1,8 +1,7 @@
 import { PromotionStatusEnum, SortEnum } from '../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum, IsDate } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class FilterPromotionDto {
   @ApiPropertyOptional({ example: 'KM1' })
@@ -10,13 +9,13 @@ export class FilterPromotionDto {
   @IsOptional()
   keywords: string;
 
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'START_DATE_IS_DATE' })
   @IsOptional()
   startDate: Date;
 
   @ApiPropertyOptional({
-    example: moment().add(10, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(10, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'END_DATE_IS_DATE' })
   @IsOptional()

@@ -8,8 +8,7 @@ import {
   Length,
 } from 'class-validator';
 import { TripDetailStatusEnum } from '../../../enums';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class CreateTripDetailDto {
   @ApiProperty({ example: '' })
@@ -18,13 +17,13 @@ export class CreateTripDetailDto {
   @Length(1, 100, { message: 'CODE_BETWEEN_1_100_CHARACTERS' })
   code: string;
 
-  @ApiProperty({ example: moment().add(1, 'days').format('YYYY-MM-DD HH:mm') })
+  @ApiProperty({ example: new MyMoment().add(1, 'days').format('YYYY-MM-DD HH:mm') })
   @IsNotEmpty({ message: 'DEPARTURE_TIME_REQUIRED' })
   @IsDate({ message: 'INVALID_DATE' })
   departureTime: Date;
 
   @ApiProperty({
-    example: moment().add(10, 'hours').format('YYYY-MM-DD HH:mm'),
+    example: new MyMoment().add(10, 'hours').format('YYYY-MM-DD HH:mm'),
   })
   @IsNotEmpty({ message: 'EXPECTED_TIME_REQUIRED' })
   @IsDate({ context: { errorCode: 400, description: 'INVALID_DATE' } })

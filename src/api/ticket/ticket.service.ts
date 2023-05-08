@@ -23,8 +23,7 @@ import {
 } from '@nestjs/common';
 import { Repository, DataSource, EntityManager } from 'typeorm';
 import { SeatService } from '../seat/seat.service';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class TicketService {
@@ -150,16 +149,9 @@ export class TicketService {
     ticket.code = code;
     ticket.note = note;
 
-    // const currentDate = moment().toDate();
-
     if (!startDate) {
       throw new BadRequestException('TICKET_START_DATE_IS_REQUIRED');
     }
-    // if (startDate <= currentDate) {
-    //   throw new BadRequestException(
-    //     'TICKET_START_DATE_GREATER_THAN_CURRENT_DATE',
-    //   );
-    // }
     ticket.startDate = startDate;
     if (!endDate) {
       throw new BadRequestException('TICKET_END_DATE_IS_REQUIRED');
@@ -273,7 +265,7 @@ export class TicketService {
       ticket.tripDetailCode = tripDetail.code;
       ticket.tripDetail = tripDetail;
     }
-    const currentDate = moment().toDate();
+    const currentDate = new MyMoment().toDate();
     if (startDate) {
       if (startDate <= currentDate) {
         throw new BadRequestException(

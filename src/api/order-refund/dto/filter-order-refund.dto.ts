@@ -7,7 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import * as moment from 'moment';
+import { MyMoment } from './../../../utils';
 // moment.locale('vi');
 
 export class FilterOrderRefundDto {
@@ -46,13 +46,13 @@ export class FilterOrderRefundDto {
   @IsOptional()
   maxTotal: number;
 
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'START_DATE_IS_DATE' })
   @IsOptional()
   startDate: Date;
 
   @ApiPropertyOptional({
-    example: moment().add(10, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(10, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'END_DATE_IS_DATE' })
   @IsOptional()

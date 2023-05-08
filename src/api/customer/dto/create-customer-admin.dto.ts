@@ -13,8 +13,7 @@ import {
 } from 'class-validator';
 import { GenderEnum } from '../../../enums/gender.enum';
 import { Length } from 'class-validator';
-// import { MyMoment } from './../../../utils';
-import * as moment from 'moment';
+import { MyMoment } from './../../../utils';
 
 export class CreateCustomerForAdminDto {
   @ApiPropertyOptional({ example: 'superman@gmail.com' })
@@ -52,7 +51,7 @@ export class CreateCustomerForAdminDto {
   @Length(1, 255, { message: 'ADDRESS_BETWEEN_1_255_CHARACTERS' })
   address: string;
 
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'BIRTHDAY_IS_DATE' })
   @IsOptional()
   birthday?: Date;

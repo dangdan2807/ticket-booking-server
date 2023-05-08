@@ -23,8 +23,7 @@ import {
 } from './dto';
 import { Order, PaymentHistory } from './../../database/entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class PaymentHistoryService {
@@ -256,13 +255,13 @@ export class PaymentHistoryService {
         break;
     }
     if (fromDatePaymentTime) {
-      const newFromDate = moment(fromDatePaymentTime).startOf('day').toDate();
+      const newFromDate = new MyMoment(fromDatePaymentTime).startOf('day').toDate();
       query.andWhere('q.paymentTime >= :fromDatePaymentTime', {
         fromDatePaymentTime: newFromDate,
       });
     }
     if (toDatePaymentTime) {
-      const newToDate = moment(toDatePaymentTime).startOf('day').toDate();
+      const newToDate = new MyMoment(toDatePaymentTime).startOf('day').toDate();
       query.andWhere('q.paymentTime <= :toDatePaymentTime', {
         toDatePaymentTime: newToDate,
       });

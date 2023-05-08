@@ -1,10 +1,72 @@
+namespace unitOfTime {
+  export type Base =
+    | 'year'
+    | 'years'
+    | 'y'
+    | 'month'
+    | 'months'
+    | 'M'
+    | 'week'
+    | 'weeks'
+    | 'w'
+    | 'day'
+    | 'days'
+    | 'd'
+    | 'hour'
+    | 'hours'
+    | 'h'
+    | 'minute'
+    | 'minutes'
+    | 'm'
+    | 'second'
+    | 'seconds'
+    | 's'
+    | 'millisecond'
+    | 'milliseconds'
+    | 'ms';
+
+  export type Quarter = 'quarter' | 'quarters' | 'Q';
+  export type IsoWeek = 'isoWeek' | 'isoWeeks' | 'W';
+  export type Date = 'date' | 'dates' | 'D';
+  export type DurationConstructor = Base | Quarter;
+
+  export type DurationAs = Base;
+
+  export type StartOf = Base | Quarter | IsoWeek | Date | null;
+
+  export type Diff = Base | Quarter;
+
+  export type MomentConstructor = Base | Date;
+
+  export type All =
+    | Base
+    | Quarter
+    | IsoWeek
+    | Date
+    | 'weekYear'
+    | 'weekYears'
+    | 'gg'
+    | 'isoWeekYear'
+    | 'isoWeekYears'
+    | 'GG'
+    | 'dayOfYear'
+    | 'dayOfYears'
+    | 'DDD'
+    | 'weekday'
+    | 'weekdays'
+    | 'e'
+    | 'isoWeekday'
+    | 'isoWeekdays'
+    | 'E';
+}
+
 export class MyMoment {
   private date;
   constructor(date?) {
     this.date = date ? new Date(date) : new Date();
   }
 
-  format(format) {
+  format(format: string) {
     const pad = (value) => (value < 10 ? `0${value}` : value.toString());
     const year = this.date.getFullYear();
     const month = pad(this.date.getMonth() + 1);
@@ -23,7 +85,7 @@ export class MyMoment {
     return format;
   }
 
-  subtract(amount, unit) {
+  subtract(amount: number, unit: unitOfTime.DurationConstructor) {
     const unitsInMilliseconds = {
       milliseconds: 1,
       seconds: 1000,
@@ -39,7 +101,7 @@ export class MyMoment {
     return new MyMoment(newDate);
   }
 
-  add(amount, unit) {
+  add(amount: number, unit: unitOfTime.DurationConstructor) {
     const unitsInMilliseconds = {
       milliseconds: 1,
       seconds: 1000,
@@ -55,30 +117,35 @@ export class MyMoment {
     return new MyMoment(newDate);
   }
 
-  startOf(unit) {
+  startOf(unit: unitOfTime.StartOf) {
     const newDate = new Date(this.date.getTime());
 
-    if (unit === 'year') {
+    if (unit === 'year' || unit === 'years') {
       newDate.setMonth(0);
       newDate.setDate(1);
       newDate.setHours(0, 0, 0, 0);
-    } else if (unit === 'month') {
+    } else if (unit === 'month' || unit === 'months') {
       newDate.setDate(1);
       newDate.setHours(0, 0, 0, 0);
-    } else if (unit === 'day') {
+    } else if (unit === 'day' || unit === 'days') {
       newDate.setHours(0, 0, 0, 0);
-    } else if (unit === 'hour') {
+    } else if (unit === 'hour' || unit === 'hours') {
       newDate.setMinutes(0, 0, 0);
-    } else if (unit === 'minute') {
+    } else if (unit === 'minute' || unit === 'minutes') {
       newDate.setSeconds(0, 0);
-    } else if (unit === 'second') {
+    } else if (unit === 'second' || unit === 'seconds') {
       newDate.setMilliseconds(0);
+    } else if (unit === 'isoWeek' || unit === 'isoWeeks') {
+      const dayOfWeek = new Date(this.date.getTime()).getDay();
+      const diff = newDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+      newDate.setDate(diff);
+      newDate.setHours(0, 0, 0, 0);
     }
 
     return new MyMoment(newDate);
   }
 
-  endOf(unit) {
+  endOf(unit: unitOfTime.StartOf) {
     const newDate = new Date(this.date.getTime());
 
     if (unit === 'year') {
@@ -106,8 +173,10 @@ export class MyMoment {
     return this.date;
   }
 
-  diff(moment, unit) {
-    const diffMilliseconds = Math.abs(this.date - moment.toDate());
+  diff(moment: MyMoment | Date, unit: unitOfTime.Diff) {
+    const diffMilliseconds = Math.abs(
+      this.date - (moment instanceof MyMoment ? moment.toDate() : moment),
+    );
 
     const unitsInMilliseconds = {
       milliseconds: 1,

@@ -7,11 +7,10 @@ import {
   IsNotEmpty,
   IsString,
 } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class FilterPriceDetailForBookingDto {
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'APPLY_DATE_IS_DATE' })
   @IsOptional()
   applyDate: Date;

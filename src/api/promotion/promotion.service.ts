@@ -20,8 +20,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class PromotionService {
@@ -116,11 +115,11 @@ export class PromotionService {
       });
     }
     if (startDate) {
-      const newStartDate = moment(startDate).startOf('day').toDate();
+      const newStartDate = new MyMoment(startDate).startOf('day').toDate();
       query.andWhere(`q.startDate >= :startDate`, { startDate: newStartDate });
     }
     if (endDate) {
-      const newEndDate = moment(endDate).endOf('day').toDate();
+      const newEndDate = new MyMoment(endDate).endOf('day').toDate();
       query.andWhere(`q.endDate <= :endDate`, { endDate: newEndDate });
     }
     switch (status) {
@@ -178,8 +177,8 @@ export class PromotionService {
     if (!startDate) {
       throw new BadRequestException('START_DATE_IS_REQUIRED');
     }
-    const currentDate = moment().startOf('day').toDate();
-    const newStartDate = moment(startDate).startOf('day').toDate();
+    const currentDate = new MyMoment().startOf('day').toDate();
+    const newStartDate = new MyMoment(startDate).startOf('day').toDate();
     if (newStartDate <= currentDate) {
       throw new BadRequestException('START_DATE_GREATER_THAN_NOW');
     }
@@ -188,7 +187,7 @@ export class PromotionService {
     if (!endDate) {
       throw new BadRequestException('END_DATE_IS_REQUIRED');
     }
-    const newEndDate = moment(endDate).startOf('day').toDate();
+    const newEndDate = new MyMoment(endDate).startOf('day').toDate();
     if (newStartDate > newEndDate) {
       throw new BadRequestException('START_DATE_MUST_BE_LESS_THAN_END_DATE');
     }
@@ -238,7 +237,7 @@ export class PromotionService {
     if (!promotion) {
       throw new NotFoundException('PROMOTION_NOT_FOUND');
     }
-    const currentDate = moment().startOf('day').toDate();
+    const currentDate = new MyMoment().startOf('day').toDate();
     if (promotion.endDate < currentDate) {
       throw new BadRequestException('PROMOTION_HAS_EXPIRED');
     }
@@ -266,7 +265,7 @@ export class PromotionService {
     }
 
     if (startDate) {
-      const newStartDate = moment(startDate).startOf('day').toDate();
+      const newStartDate = new MyMoment(startDate).startOf('day').toDate();
       if (newStartDate.getTime() === promotion.startDate.getTime()) {
         if (
           promotion.status === PromotionStatusEnum.ACTIVE &&
@@ -290,7 +289,7 @@ export class PromotionService {
       }
     }
     if (endDate) {
-      const newEndDate = moment(endDate).startOf('day').toDate();
+      const newEndDate = new MyMoment(endDate).startOf('day').toDate();
       if (newEndDate.getTime() === promotion.startDate.getTime()) {
         if (endDate < currentDate) {
           throw new BadRequestException(
@@ -337,7 +336,7 @@ export class PromotionService {
     if (!promotion) {
       throw new NotFoundException('PROMOTION_NOT_FOUND');
     }
-    const currentDate = moment().startOf('day').toDate();
+    const currentDate = new MyMoment().startOf('day').toDate();
     if (promotion.endDate < currentDate) {
       throw new BadRequestException('PROMOTION_HAS_EXPIRED');
     }
@@ -385,7 +384,7 @@ export class PromotionService {
             message: 'Không tìm thấy chương trình khuyến mãi',
           };
         }
-        const currentDate = moment().startOf('day').toDate();
+        const currentDate = new MyMoment().startOf('day').toDate();
         if (promotion.endDate < currentDate) {
           return {
             id: type === DeleteDtoTypeEnum.ID ? data : undefined,

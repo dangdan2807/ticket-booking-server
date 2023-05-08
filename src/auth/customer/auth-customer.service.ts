@@ -11,9 +11,8 @@ import { DataSource, Repository } from 'typeorm';
 import { AuthService } from '../auth.service';
 import { CustomerLoginDto, CustomerRegisterDto, SendOtpDto } from './dto';
 import { generateCustomerCode } from './../../utils';
-import * as moment from 'moment';
 import { ConfigService } from '@nestjs/config';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class AuthCustomerService {
@@ -58,7 +57,7 @@ export class AuthCustomerService {
     let saveUser: Customer;
     const otpCode = Math.floor(100000 + Math.random() * 900000) + '';
     const otpExpiredTime = this.configService.get('OTP_EXPIRE_MINUTE');
-    const otpExpired = moment().add(otpExpiredTime, 'minutes').toDate();
+    const otpExpired = new MyMoment().add(otpExpiredTime, 'minutes').toDate();
     try {
       await queryRunner.connect();
       await queryRunner.startTransaction();
@@ -233,7 +232,7 @@ export class AuthCustomerService {
     }
     const otpCode = Math.floor(100000 + Math.random() * 900000) + '';
     const otpExpiredTime = this.configService.get('OTP_EXPIRE_MINUTE');
-    const otpExpired = moment().add(otpExpiredTime, 'minutes').toDate();
+    const otpExpired = new MyMoment().add(otpExpiredTime, 'minutes').toDate();
 
     const saveCustomer = await this.customerService.updateOtp(
       customer.id,

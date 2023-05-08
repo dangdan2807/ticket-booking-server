@@ -7,8 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class FilterPaymentHistoryDto {
   @ApiPropertyOptional({ example: '' })
@@ -61,13 +60,13 @@ export class FilterPaymentHistoryDto {
   paymentMethod: PaymentMethodEnum;
 
   @ApiPropertyOptional({
-    example: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().subtract(7, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'FROM_DATE_PAYMENT_TIME_IS_DATE' })
   @IsOptional()
   fromDatePaymentTime: Date;
 
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'TO_DATE_PAYMENT_TIME_IS_DATE' })
   @IsOptional()
   toDatePaymentTime: Date;

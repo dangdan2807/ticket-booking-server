@@ -21,8 +21,7 @@ import {
   ProductDiscountDto,
   ProductDiscountPercentDto,
 } from './promotion-type.dto';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class CreatePromotionLinesDto {
   @ApiProperty({ example: 'KM1' })
@@ -65,20 +64,20 @@ export class CreatePromotionLinesDto {
   tripCodes: string[];
 
   @ApiPropertyOptional({
-    example: moment().add(1, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(1, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'START_DATE_IS_DATE' })
-  @MinDate(new Date(moment().format('YYYY-MM-DD')), {
+  @MinDate(new Date(new MyMoment().format('YYYY-MM-DD')), {
     message: 'START_DATE_GREATER_THAN_NOW',
   })
   @IsOptional()
   startDate: Date;
 
   @ApiPropertyOptional({
-    example: moment().add(10, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(10, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'END_DATE_IS_DATE' })
-  @MinDate(new Date(moment().format('YYYY-MM-DD')), {
+  @MinDate(new Date(new MyMoment().format('YYYY-MM-DD')), {
     message: 'END_DATE_GREATER_THAN_NOW',
   })
   @IsOptional()

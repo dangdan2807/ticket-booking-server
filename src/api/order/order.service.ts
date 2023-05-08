@@ -53,7 +53,6 @@ import { UpdateTicketDetailDto } from '../ticket/dto';
 import { PromotionLineService } from '../promotion-line/promotion-line.service';
 import { PromotionHistoryService } from '../promotion-history/promotion-history.service';
 import { CreatePromotionHistoryDto } from '../promotion-history/dto';
-import * as moment from 'moment';
 import {
   FilterOrderRefundDto,
   UpdateOrderRefundDto,
@@ -61,7 +60,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import { CreatePaymentHistoryDto } from '../payment-history/dto';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class OrderService {
@@ -415,11 +414,11 @@ export class OrderService {
     }
 
     if (startDate) {
-      const newStartDate = moment(startDate).startOf('day').toDate();
+      const newStartDate = new MyMoment(startDate).startOf('day').toDate();
       query.andWhere('q.createdAt >= :newStartDate', { newStartDate });
     }
     if (endDate) {
-      const newEndDate = moment(endDate).endOf('day').toDate();
+      const newEndDate = new MyMoment(endDate).endOf('day').toDate();
       query.andWhere('q.createdAt <= :newEndDate', { newEndDate });
     }
 
@@ -429,7 +428,7 @@ export class OrderService {
       .addOrderBy('q.code', SortEnum.ASC);
 
     if (status[0] === OrderStatusEnum.PAID && status.length === 1) {
-      const currentDate = moment().toDate();
+      const currentDate = new MyMoment().toDate();
       if (
         isDeparted === this.BILL_HISTORY_TYPE_HAS_DEPARTED ||
         isDeparted === this.BILL_HISTORY_TYPE_NOT_DEPARTED
@@ -614,9 +613,9 @@ export class OrderService {
         relations: { trip: true },
       },
     );
-    const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm'));
+    const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm'));
     const currentDatePlus1Hours = new Date(
-      moment().add(1, 'hours').format('YYYY-MM-DD HH:mm'),
+      new MyMoment().add(1, 'hours').format('YYYY-MM-DD HH:mm'),
     );
     if (currentDate >= tripDetail.departureTime) {
       throw new BadRequestException('TRIP_DETAIL_HAS_PASSED');
@@ -869,11 +868,11 @@ export class OrderService {
           }
           order.status = OrderStatusEnum.RETURNED;
 
-          const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm'));
+          const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm'));
           const tripDetail: TripDetail =
             order.orderDetails[0].ticketDetail.ticket.tripDetail;
           const departureTime = tripDetail.departureTime;
-          const timeDiff = moment(departureTime).diff(currentDate, 'hours');
+          const timeDiff = new MyMoment(departureTime).diff(currentDate, 'hours');
           if (customer && timeDiff < 12 && timeDiff > 0) {
             throw new BadRequestException('ORDER_CANNOT_CANCEL_12H_BEFORE');
           } else if (timeDiff <= 0) {
@@ -1074,7 +1073,7 @@ export class OrderService {
       orderDetail.ticketDetail = ticketDetail;
       // get price detail
       const ticketDetailId = ticketDetail.id;
-      const currentDate = moment().startOf('day').toDate();
+      const currentDate = new MyMoment().startOf('day').toDate();
 
       const { dataResult } =
         await this.priceListService.findPriceDetailForBooking({

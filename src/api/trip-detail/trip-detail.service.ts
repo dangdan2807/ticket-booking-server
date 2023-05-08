@@ -26,7 +26,7 @@ import {
 } from './../../enums';
 import { Pagination } from './../../decorator';
 import { TicketService } from '../ticket/ticket.service';
-import * as moment from 'moment';
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class TripDetailService {
@@ -209,8 +209,8 @@ export class TripDetailService {
 
       // const minTime = startOfDay;
       // const maxTime = endOfDay;
-      const minTime = moment(departureTime).startOf('day').toDate();
-      const maxTime = moment(departureTime).endOf('day').toDate();
+      const minTime = new MyMoment(departureTime).startOf('day').toDate();
+      const maxTime = new MyMoment(departureTime).endOf('day').toDate();
       query
         .andWhere('q.departureTime >= :minTime', { minTime })
         .andWhere('q.departureTime <= :maxTime', { maxTime });
@@ -316,7 +316,7 @@ export class TripDetailService {
     tripDetail.fromProvince = fromProvince;
     tripDetail.toProvince = toProvince;
 
-    const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm'));
+    const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm'));
     if (trip.endDate < currentDate) {
       throw new BadRequestException('TRIP_HAS_ENDED');
     }
@@ -325,7 +325,7 @@ export class TripDetailService {
     if (!departureTime) {
       throw new BadRequestException('DEPARTURE_TIME_REQUIRED');
     }
-    const tomorrowDate = new Date(moment().add(1, 'days').format('YYYY-MM-DD'));
+    const tomorrowDate = new Date(new MyMoment().add(1, 'days').format('YYYY-MM-DD'));
     if (departureTime < tomorrowDate) {
       throw new BadRequestException(
         'DEPARTURE_DATE_GREATER_THAN_OR_EQUAL_TO_TOMORROW',
@@ -347,7 +347,7 @@ export class TripDetailService {
       throw new BadRequestException('EXPECTED_TIME_REQUIRED');
     }
     const expectedDate = new Date(
-      moment(departureTime).add(2, 'hours').format('YYYY-MM-DD HH:mm'),
+      new MyMoment(departureTime).add(2, 'hours').format('YYYY-MM-DD HH:mm'),
     );
     if (expectedTime < expectedDate) {
       throw new BadRequestException(
@@ -462,7 +462,7 @@ export class TripDetailService {
     }
 
     const trip: Trip = tripDetail.trip;
-    const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm:ss'));
+    const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm:ss'));
     if (trip.endDate < currentDate) {
       throw new BadRequestException('TRIP_HAS_ENDED_NOT_UPDATE');
     }
@@ -471,7 +471,7 @@ export class TripDetailService {
     }
 
     const currentDatePlus15M = new Date(
-      moment().add(15, 'minutes').format('YYYY-MM-DD HH:mm'),
+      new MyMoment().add(15, 'minutes').format('YYYY-MM-DD HH:mm'),
     );
     if (departureTime) {
       if (departureTime < currentDatePlus15M) {
@@ -502,7 +502,7 @@ export class TripDetailService {
     if (expectedTime) {
       const departureTime2 = departureTime || tripDetail.departureTime;
       const expectedDate = new Date(
-        moment(departureTime2).add(2, 'hours').format('YYYY-MM-DD HH:mm'),
+        new MyMoment(departureTime2).add(2, 'hours').format('YYYY-MM-DD HH:mm'),
       );
       if (expectedTime < expectedDate) {
         throw new BadRequestException(
@@ -604,7 +604,7 @@ export class TripDetailService {
     if (!tripDetail) {
       throw new BadRequestException('TRIP_DETAIL_NOT_FOUND');
     }
-    const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm:ss'));
+    const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm:ss'));
     if (tripDetail.trip.endDate < currentDate) {
       throw new BadRequestException('TRIP_HAS_ENDED');
     }
@@ -665,7 +665,7 @@ export class TripDetailService {
               message: 'TRIP_DETAIL_NOT_FOUND',
             };
           }
-          const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm:ss'));
+          const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm:ss'));
           if (tripDetail.trip.endDate < currentDate) {
             throw new BadRequestException('TRIP_HAS_ENDED');
           }
@@ -712,10 +712,10 @@ export class TripDetailService {
     if (startDate > endDate) {
       throw new BadRequestException('START_DATE_MUST_BE_BEFORE_END_DATE');
     }
-    const newStartDate = moment(startDate).startOf('day').toDate();
-    const newEndDate = moment(endDate).endOf('day').toDate();
+    const newStartDate = new MyMoment(startDate).startOf('day').toDate();
+    const newEndDate = new MyMoment(endDate).endOf('day').toDate();
     // startDate not more than 7 days from endDate
-    if (moment(newEndDate).diff(moment(newStartDate), 'days') > 7) {
+    if (new MyMoment(newEndDate).diff(new MyMoment(newStartDate), 'days') > 7) {
       throw new BadRequestException(
         'START_DATE_NOT_MORE_THAN_7_DAYS_FROM_END_DATE',
       );

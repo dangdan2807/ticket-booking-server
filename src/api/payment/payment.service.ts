@@ -28,13 +28,12 @@ import { ConfigService } from '@nestjs/config';
 import * as CryptoJS from 'crypto-js';
 import axios from 'axios';
 import * as qs from 'qs';
-import * as moment from 'moment';
 import { PaymentHistoryService } from '../payment-history/payment-history.service';
 import {
   CreatePaymentHistoryDto,
   UpdatePaymentHistoryDto,
 } from '../payment-history/dto';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class PaymentService {
@@ -152,7 +151,7 @@ export class PaymentService {
       }
       const tripDetail =
         orderExist.orderDetails[0].ticketDetail.ticket.tripDetail;
-      const currentDate = new Date(moment().format('YYYY-MM-DD HH:mm'));
+      const currentDate = new Date(new MyMoment().format('YYYY-MM-DD HH:mm'));
       if (currentDate >= tripDetail.departureTime) {
         throw new BadRequestException('TRIP_DETAIL_HAS_PASSED_NOT_PAYMENT');
       }
@@ -166,7 +165,7 @@ export class PaymentService {
         redirecturl: this.configService.get('REDIRECT_URL'),
       };
       const randomCode = Math.floor(Math.random() * 1000000);
-      const transID = `${moment().format('YYMMDD')}_${orderCode}-${randomCode}`;
+      const transID = `${new MyMoment().format('YYMMDD')}_${orderCode}-${randomCode}`;
       const items = [
         {
           orderCode,

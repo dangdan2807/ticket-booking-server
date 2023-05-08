@@ -12,7 +12,7 @@ import {
   IsPhoneNumber,
   IsNumber,
 } from 'class-validator';
-import * as moment from 'moment';
+import { MyMoment } from './../../../utils';
 
 export class CustomerRegisterDto {
   @ApiPropertyOptional({ example: 'superman@gmail.com' })
@@ -43,7 +43,7 @@ export class CustomerRegisterDto {
   @MaxLength(255, { message: 'FULL_NAME_IS_MAX_LENGTH_255' })
   fullName: string;
 
-  @ApiPropertyOptional({ example: moment().subtract(18, 'years').toDate() })
+  @ApiPropertyOptional({ example: new MyMoment().subtract(18, 'years').toDate() })
   @IsDate({ message: 'BIRTHDAY_IS_DATE' })
   @IsOptional()
   birthday?: Date;

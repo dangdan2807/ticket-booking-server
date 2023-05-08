@@ -1,8 +1,7 @@
 import { OrderStatusEnum, SortEnum } from '../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDate, IsEnum, IsOptional, IsString } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class FilterBillHistoryDto {
   @ApiPropertyOptional({ example: 'Bảng giá tháng 3/2023' })
@@ -21,13 +20,13 @@ export class FilterBillHistoryDto {
   @IsOptional()
   status: OrderStatusEnum;
 
-  @ApiPropertyOptional({ example: moment().format('YYYY-MM-DD') })
+  @ApiPropertyOptional({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsDate({ message: 'START_DATE_IS_DATE' })
   @IsOptional()
   startDate: Date;
 
   @ApiPropertyOptional({
-    example: moment().add(10, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(10, 'days').format('YYYY-MM-DD'),
   })
   @IsDate({ message: 'END_DATE_IS_DATE' })
   @IsOptional()

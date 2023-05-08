@@ -14,8 +14,7 @@ import { Staff, Station, Trip } from './../../database/entities';
 import { DataSource, Repository } from 'typeorm';
 import { SortEnum, DeleteDtoTypeEnum, ActiveStatusEnum } from './../../enums';
 import { Pagination } from './../../decorator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../utils';
 
 @Injectable()
 export class TripService {
@@ -140,15 +139,15 @@ export class TripService {
     trip.name = name;
     trip.note = note;
     // check start date
-    const currentDate = moment().startOf('day').toDate();
-    const newStartDate = moment(startDate).startOf('day').toDate();
+    const currentDate = new MyMoment().startOf('day').toDate();
+    const newStartDate = new MyMoment(startDate).startOf('day').toDate();
     if (newStartDate <= currentDate) {
       throw new BadRequestException('START_DATE_GREATER_THAN_NOW');
     }
     trip.startDate = newStartDate;
     // check end date
 
-    const newEndDate = moment(endDate).startOf('day').toDate();
+    const newEndDate = new MyMoment(endDate).startOf('day').toDate();
     if (newEndDate < currentDate) {
       throw new BadRequestException('END_DATE_GREATER_THAN_NOW');
     }
@@ -238,11 +237,11 @@ export class TripService {
     }
 
     if (startDate) {
-      const newStartDate = moment(startDate).startOf('day').toDate();
+      const newStartDate = new MyMoment(startDate).startOf('day').toDate();
       query.andWhere('q.startDate >= :startDate', { startDate: newStartDate });
     }
     if (endDate) {
-      const newEndDate = moment(endDate).startOf('day').toDate();
+      const newEndDate = new MyMoment(endDate).startOf('day').toDate();
       query.andWhere('q.endDate <= :endDate', { endDate: newEndDate });
     }
     if (fromStationId) {
@@ -344,9 +343,9 @@ export class TripService {
       trip.note = note;
     }
 
-    const currentDate = moment().startOf('day').toDate();
+    const currentDate = new MyMoment().startOf('day').toDate();
     if (startDate) {
-      const newStartDate = moment(startDate).startOf('day').toDate();
+      const newStartDate = new MyMoment(startDate).startOf('day').toDate();
       if (newStartDate <= currentDate) {
         throw new BadRequestException('START_DATE_GREATER_THAN_NOW');
       }
@@ -361,7 +360,7 @@ export class TripService {
       trip.startDate = newStartDate;
     }
     if (endDate) {
-      const newEndDate = moment(endDate).startOf('day').toDate();
+      const newEndDate = new MyMoment(endDate).startOf('day').toDate();
       if (newEndDate <= currentDate) {
         throw new BadRequestException(
           'END_DATE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_NOW',

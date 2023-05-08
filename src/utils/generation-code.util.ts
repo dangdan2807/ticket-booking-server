@@ -1,5 +1,5 @@
 import * as shortId from 'shortid';
-import * as moment from 'moment';
+import { MyMoment } from './../utils';
 
 export function generateOrderCode() {
   const date = new Date();
@@ -35,7 +35,7 @@ export function generateCustomerCode() {
     '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@',
   );
   const randomNum = Math.floor(Math.random() * 1000000).toString();
-  const currentDate = moment().format('YYYYMMDD');
+  const currentDate = new MyMoment().format('YYYYMMDD');
   const code = `KH${currentDate}${shortId
     .generate()
     .replace(/[$@]/g, '')}${randomNum}`;

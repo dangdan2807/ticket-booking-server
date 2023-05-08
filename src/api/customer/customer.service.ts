@@ -24,7 +24,6 @@ import { UpdateCustomerDto, UserUpdatePasswordDto } from '../user/dto';
 import { AddCustomerDto, RemoveCustomerDto } from '../customer-group/dto';
 import { generateCustomerCode } from './../../utils';
 import * as bcrypt from 'bcrypt';
-import * as moment from 'moment';
 import { MyMoment } from './../../utils';
 
 @Injectable()
@@ -502,7 +501,7 @@ export class CustomerService {
     if (birthday) {
       customer.birthday = birthday;
     } else {
-      customer.birthday = moment().startOf('day').toDate();
+      customer.birthday = new MyMoment().startOf('day').toDate();
     }
 
     if (email) {

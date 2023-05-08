@@ -1,10 +1,7 @@
 import { GenderEnum } from './../../../enums';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-// import * as moment from 'moment';
-import moment from 'moment';
 import { MyMoment } from './../../../utils';
-const now = new MyMoment();
 
 export class AdminUpdateDto {
   @ApiPropertyOptional({ example: 'fullName' })
@@ -26,7 +23,7 @@ export class AdminUpdateDto {
   address: string;
 
   @ApiPropertyOptional({
-    example: now.subtract(18, 'years').format('YYYY-MM-DD'),
+    example: new MyMoment().subtract(18, 'years').format('YYYY-MM-DD'),
   })
   @IsString({ message: 'BIRTHDAY_MUST_BE_STRING' })
   @IsOptional()

@@ -8,8 +8,7 @@ import {
   IsEnum,
   IsDate,
 } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class CreatePriceListDto {
   @ApiProperty({ example: 'BGT32023' })
@@ -25,14 +24,14 @@ export class CreatePriceListDto {
   name: string;
 
   @ApiProperty({
-    example: moment().add(1, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(1, 'days').format('YYYY-MM-DD'),
   })
   @IsNotEmpty({ message: 'START_DATE_IS_REQUIRED' })
   @IsDate({ message: 'START_DATE_IS_DATE' })
   startDate: Date;
 
   @ApiProperty({
-    example: moment().add(10, 'days').format('YYYY-MM-DD'),
+    example: new MyMoment().add(10, 'days').format('YYYY-MM-DD'),
   })
   @IsNotEmpty({ message: 'START_DATE_IS_REQUIRED' })
   @IsDate({ message: 'END_DATE_IS_DATE' })

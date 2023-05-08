@@ -9,8 +9,7 @@ import {
   IsDate,
   MinDate,
 } from 'class-validator';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class CreatePromotionDto {
   @ApiProperty({ example: 'KM1' })
@@ -41,18 +40,18 @@ export class CreatePromotionDto {
   @IsOptional()
   image: string;
 
-  @ApiProperty({ example: moment().format('YYYY-MM-DD') })
+  @ApiProperty({ example: new MyMoment().format('YYYY-MM-DD') })
   @IsNotEmpty({ message: 'START_DATE_IS_REQUIRED' })
   @IsDate({ message: 'START_DATE_IS_DATE' })
-  @MinDate(new Date(moment().format('YYYY-MM-DD')), {
+  @MinDate(new Date(new MyMoment().format('YYYY-MM-DD')), {
     message: 'START_DATE_GREATER_THAN_NOW',
   })
   startDate: Date;
 
-  @ApiProperty({ example: moment().add(10, 'days').format('YYYY-MM-DD') })
+  @ApiProperty({ example: new MyMoment().add(10, 'days').format('YYYY-MM-DD') })
   @IsNotEmpty({ message: 'START_DATE_IS_REQUIRED' })
   @IsDate({ message: 'END_DATE_IS_DATE' })
-  @MinDate(new Date(moment().add(10, 'days').format('YYYY-MM-DD')), {
+  @MinDate(new Date(new MyMoment().add(10, 'days').format('YYYY-MM-DD')), {
     message: 'END_DATE_GREATER_THAN_NOW',
   })
   endDate: Date;

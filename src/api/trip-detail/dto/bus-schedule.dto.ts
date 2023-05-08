@@ -1,16 +1,15 @@
 import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { TripDetailStatusEnum } from './../../../enums';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import * as moment from 'moment';
-// moment.locale('vi');
+import { MyMoment } from './../../../utils';
 
 export class BusScheduleDto {
-  @ApiProperty({ example: moment().startOf('isoWeek').format('YYYY-MM-DD HH:mm') })
+  @ApiProperty({ example: new MyMoment().startOf('isoWeek').format('YYYY-MM-DD HH:mm') })
   @IsNotEmpty({ message: 'START_DATE_IS_REQUIRED' })
   @IsDate({ message: 'INVALID_DATE' })
   startDate: Date;
 
-  @ApiProperty({ example: moment().endOf('isoWeek').format('YYYY-MM-DD HH:mm') })
+  @ApiProperty({ example: new MyMoment().endOf('isoWeek').format('YYYY-MM-DD HH:mm') })
   @IsNotEmpty({ message: 'END_DATE_IS_REQUIRED' })
   @IsDate({ message: 'INVALID_DATE' })
   endDate: Date;

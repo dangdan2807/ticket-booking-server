@@ -29,6 +29,9 @@ import {
   WardDeleteMultiId,
   WardDeleteMultiCode,
 } from './dto';
+import { MyMoment } from './../../../utils';
+import * as moment from 'moment';
+
 @Controller('ward')
 @ApiTags('Ward')
 export class WardController {
@@ -139,6 +142,28 @@ export class WardController {
     @Body() dto: WardDeleteMultiCode,
   ) {
     return await this.wardService.deleteMultipleWardByCode(user.id, dto);
+  }
+
+  @Get('demo')
+  @HttpCode(HttpStatus.OK)
+  async demo() {
+    const currentDate = new Date();
+    const formatDate = new MyMoment(currentDate).format('YYYY-MM-DD HH:mm:ss');
+    const startOfDate = new MyMoment(currentDate).startOf('day').toDate();
+    const endOfDate = new MyMoment(currentDate).endOf('day').toDate();
+    return {
+      MyMoment: {
+        format: formatDate,
+        startOfDate,
+        endOfDate,
+      },
+      moment: {
+        format: moment(currentDate).format('YYYY-MM-DD HH:mm:ss'),
+        startOfDate: moment(currentDate).startOf('day'),
+        endOfDate: moment(currentDate).endOf('day'),
+        // endOfDate: moment(currentDate).diff('day'),
+      }
+    };
   }
 
   // crawl data

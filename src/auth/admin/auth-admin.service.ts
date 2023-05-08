@@ -11,9 +11,10 @@ import { DataSource, Repository } from 'typeorm';
 import { AuthService } from '../auth.service';
 import { AdminLoginDto, AdminRegisterDto } from './dto';
 import { SendOtpDto } from '../customer/dto';
-import * as moment from 'moment';
 import { ConfigService } from '@nestjs/config';
 import { AdminService } from './../../api/admin/admin.service';
+import { MyMoment } from './../../utils';
+
 
 @Injectable()
 export class AuthAdminService {
@@ -198,7 +199,7 @@ export class AuthAdminService {
     }
     const otpCode = Math.floor(100000 + Math.random() * 900000) + '';
     const otpExpiredTime = this.configService.get('OTP_EXPIRE_MINUTE');
-    const otpExpired = moment().add(otpExpiredTime, 'minutes').toDate();
+    const otpExpired = new MyMoment().add(otpExpiredTime, 'minutes').toDate();
 
     const saveCustomer = await this.adminService.updateOtp(
       staff.id,
