@@ -24,6 +24,7 @@ import { UpdateCustomerDto, UserUpdatePasswordDto } from '../user/dto';
 import { AddCustomerDto, RemoveCustomerDto } from '../customer-group/dto';
 import { generateCustomerCode } from './../../utils';
 import * as bcrypt from 'bcrypt';
+import * as moment from 'moment';
 import { MyMoment } from './../../utils';
 
 @Injectable()

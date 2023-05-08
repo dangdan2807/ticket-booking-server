@@ -1,126 +1,124 @@
-interface MyMoment {
-  isValid(): boolean;
-  year(): number | null;
-  month(): number | null;
-  date(): number | null;
-  hour(): number | null;
-  minute(): number | null;
-  second(): number | null;
-  millisecond(): number | null;
-  format(formatString: string): string | null;
-  subtract(amount: number, unit: string): MyMoment | null;
-  add(amount: number, unit: string): MyMoment | null;
-  startOf(unit: string): MyMoment | null;
-  toDate(): Date | null;
-}
-
-export function MyMoment(date?: string | Date): MyMoment {
-  const validDate = date ? new Date(date) : new Date();
-  const isValid = !isNaN(validDate.getTime());
-
-  return {
-    isValid: () => isValid,
-    year: () => isValid ? validDate.getFullYear() : null,
-    month: () => isValid ? validDate.getMonth() : null,
-    date: () => isValid ? validDate.getDate() : null,
-    hour: () => isValid ? validDate.getHours() : null,
-    minute: () => isValid ? validDate.getMinutes() : null,
-    second: () => isValid ? validDate.getSeconds() : null,
-    millisecond: () => isValid ? validDate.getMilliseconds() : null,
-    format: (formatString) => isValid ? format(validDate, formatString) : null,
-    subtract: (amount, unit) => isValid ? subtract(validDate, amount, unit) : null,
-    add: (amount, unit) => isValid ? add(validDate, amount, unit) : null,
-    startOf: (unit) => isValid ? startOf(validDate, unit) : null,
-    toDate: () => isValid ? toDate(validDate) : null
-  };
-}
-
-function subtract(date: Date, amount: number, unit: string): MyMoment {
-  return add(date, -amount, unit)
-}
-
-function add(date: Date, amount: number, unit: string): MyMoment {
-  const units: {[key: string]: string} = {
-    year: 'FullYear',
-    month: 'Month',
-    week: 'Date',
-    day: 'Date',
-    hour: 'Hours',
-    minute: 'Minutes',
-    second: 'Seconds',
-    millisecond: 'Milliseconds'
-  };
-
-  const newDate = new Date(date.getTime());
-  const unitValue = units[unit] || 'Milliseconds';
-
-  if (units[unit] === 'Date') {
-    newDate.setDate(date.getDate() + amount);
-  } else if (typeof date[`get${units[unit]}`] === 'function') {
-    newDate[`set${units[unit]}`](date[`get${units[unit]}`]() + amount);
-  } else {
-    return MyMoment(null);
+export class MyMoment {
+  private date;
+  constructor(date?) {
+    this.date = date ? new Date(date) : new Date();
   }
 
-  return MyMoment(newDate);
-}
+  format(format) {
+    const pad = (value) => (value < 10 ? `0${value}` : value.toString());
+    const year = this.date.getFullYear();
+    const month = pad(this.date.getMonth() + 1);
+    const day = pad(this.date.getDate());
+    const hours = pad(this.date.getHours());
+    const minutes = pad(this.date.getMinutes());
+    const seconds = pad(this.date.getSeconds());
 
-function format(date: Date, formatString: string): string {
-  const year = date.getFullYear().toString();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const hour = date.getHours().toString().padStart(2, '0');
-  const minute = date.getMinutes().toString().padStart(2, '0');
-  const second = date.getSeconds().toString().padStart(2, '0');
-  const millisecond = date.getMilliseconds().toString().padStart(3, '0');
+    format = format.replace('YYYY', year);
+    format = format.replace('MM', month);
+    format = format.replace('DD', day);
+    format = format.replace('HH', hours);
+    format = format.replace('mm', minutes);
+    format = format.replace('ss', seconds);
 
-  const formatTokens: {[key: string]: string} = {
-    YYYY: year,
-    MM: month,
-    DD: day,
-    HH: hour,
-    mm: minute,
-    ss: second,
-    SSS: millisecond
-  };
+    return format;
+  }
 
-  return formatString.replace(/YYYY|MM|DD|HH|mm|ss|SSS/g, match => formatTokens[match]);
-}
+  subtract(amount, unit) {
+    const unitsInMilliseconds = {
+      milliseconds: 1,
+      seconds: 1000,
+      minutes: 60000,
+      hours: 3600000,
+      days: 86400000,
+      months: 2592000000,
+      years: 31536000000,
+    };
 
-function startOf(date: Date, unit: string): MyMoment {
-  const units: {[key: string]: number} = {
-    year: 0,
-    month: 1,
-    week: 0,
-    day: 1,
-    hour: 0,
-    minute: 0,
-    second: 0,
-    millisecond: 0
-  };
+    const milliseconds = amount * unitsInMilliseconds[unit];
+    const newDate = new Date(this.date.getTime() - milliseconds);
+    return new MyMoment(newDate);
+  }
 
-  const newDate = new Date(date.getTime());
+  add(amount, unit) {
+    const unitsInMilliseconds = {
+      milliseconds: 1,
+      seconds: 1000,
+      minutes: 60000,
+      hours: 3600000,
+      days: 86400000,
+      months: 2592000000,
+      years: 31536000000,
+    };
 
-  switch (unit) {
-    case 'year':
+    const milliseconds = amount * unitsInMilliseconds[unit];
+    const newDate = new Date(this.date.getTime() + milliseconds);
+    return new MyMoment(newDate);
+  }
+
+  startOf(unit) {
+    const newDate = new Date(this.date.getTime());
+
+    if (unit === 'year') {
       newDate.setMonth(0);
-    case 'month':
       newDate.setDate(1);
-    case 'week':
-      newDate.setDate(date.getDate() - date.getDay());
-    case 'day':
       newDate.setHours(0, 0, 0, 0);
-    case 'hour':
+    } else if (unit === 'month') {
+      newDate.setDate(1);
+      newDate.setHours(0, 0, 0, 0);
+    } else if (unit === 'day') {
+      newDate.setHours(0, 0, 0, 0);
+    } else if (unit === 'hour') {
       newDate.setMinutes(0, 0, 0);
-    case 'minute':
+    } else if (unit === 'minute') {
       newDate.setSeconds(0, 0);
-    case 'second':
+    } else if (unit === 'second') {
       newDate.setMilliseconds(0);
+    }
+
+    return new MyMoment(newDate);
   }
 
-  return MyMoment(newDate);
-}
+  endOf(unit) {
+    const newDate = new Date(this.date.getTime());
 
-function toDate(date: Date): Date {
-  return new Date(date.getTime());
+    if (unit === 'year') {
+      newDate.setFullYear(newDate.getFullYear() + 1);
+      newDate.setMonth(0, 0);
+      newDate.setDate(0);
+      newDate.setHours(23, 59, 59, 999);
+    } else if (unit === 'month') {
+      newDate.setMonth(newDate.getMonth() + 1, 0);
+      newDate.setHours(23, 59, 59, 999);
+    } else if (unit === 'day') {
+      newDate.setHours(23, 59, 59, 999);
+    } else if (unit === 'hour') {
+      newDate.setMinutes(59, 59, 999);
+    } else if (unit === 'minute') {
+      newDate.setSeconds(59, 999);
+    } else if (unit === 'second') {
+      newDate.setMilliseconds(999);
+    }
+
+    return new MyMoment(newDate);
+  }
+
+  toDate() {
+    return this.date;
+  }
+
+  diff(moment, unit) {
+    const diffMilliseconds = Math.abs(this.date - moment.toDate());
+
+    const unitsInMilliseconds = {
+      milliseconds: 1,
+      seconds: 1000,
+      minutes: 60000,
+      hours: 3600000,
+      days: 86400000,
+      months: 2592000000,
+      years: 31536000000,
+    };
+
+    return Math.round(diffMilliseconds / unitsInMilliseconds[unit]);
+  }
 }
