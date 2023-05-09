@@ -60,6 +60,7 @@ export class PromotionHistory {
   })
   public deletedAt?: Date;
 
+  // relationship
   @ManyToOne(() => Order, (order) => order.promotionHistories)
   @JoinColumn({ name: 'order_id', referencedColumnName: 'id' })
   order: Order;

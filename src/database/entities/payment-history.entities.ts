@@ -85,15 +85,6 @@ export class PaymentHistory {
   @Column({ name: 'zalo_trans_time', type: 'timestamp', nullable: false })
   paymentTime: Date;
 
-  // @Column({
-  //   name: 'zalo_refund_Id',
-  //   type: 'varchar',
-  //   length: 100,
-  //   nullable: true,
-  //   default: '',
-  // })
-  // zaloRefundId: string;
-
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', nullable: true })
   public createdAt?: Date;
 

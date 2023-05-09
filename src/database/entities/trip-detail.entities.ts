@@ -4,11 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToOne,
 } from 'typeorm';
 
 @Entity({ name: 'trip_detail' })
@@ -65,13 +65,6 @@ export class TripDetail {
   @JoinColumn({ name: 'to_province_id', referencedColumnName: 'id' })
   toProvince: Province;
 
-  @OneToMany(() => Ticket, (ticket) => ticket.tripDetail)
-  tickets: Ticket[];
-
-  // @ManyToOne(
-  //   () => OrderRefundDetail,
-  //   (orderRefundDetail) => orderRefundDetail.ticketDetail,
-  // )
-  // @JoinColumn({ name: 'order_refund_detail_id', referencedColumnName: 'id' })
-  // orderRefundDetail: OrderRefundDetail;
+  @OneToOne(() => Ticket, (ticket) => ticket.tripDetail)
+  tickets: Ticket;
 }

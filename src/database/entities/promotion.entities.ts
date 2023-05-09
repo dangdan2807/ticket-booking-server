@@ -64,13 +64,6 @@ export class Promotion {
   })
   public deletedAt?: Date;
 
-  // relationships
-  //   () => ApplicableCustomerGroup,
-  //   (applicableCustomerGroup) =>
-  //     applicableCustomerGroup.applicableCustomerGroups,
-  // )
-  // applicableCustomerGroups: ApplicableCustomerGroup[];
-
   @OneToMany(() => PromotionLine, (promotionLine) => promotionLine.promotion)
   promotionLines: PromotionLine[];
 }

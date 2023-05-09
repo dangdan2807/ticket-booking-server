@@ -19,7 +19,6 @@ export class UpdatePromotionDto {
   note: string;
 
   @ApiPropertyOptional({ example: '' })
-  @IsString({ message: 'IMAGE_IS_STRING' })
   @IsOptional()
   image: string;
 
